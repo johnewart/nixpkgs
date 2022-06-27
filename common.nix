@@ -62,6 +62,7 @@ with lib;
       openjdk17_headless
       maven
       sbt
+      coursier
 
       kubectl
       terraform
