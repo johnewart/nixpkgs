@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+
+  imports = [
+    ./common.nix
+  ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "johnewart";
@@ -17,23 +22,6 @@
     enable = true;
     userName = "John Ewart";
     userEmail = "johnewart@microsoft.com";
-  };
-
-  programs.zsh = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "robbyrussell";
-    };
   };
 
   services.gpg-agent = { 
