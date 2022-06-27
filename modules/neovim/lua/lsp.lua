@@ -20,6 +20,9 @@ local nvim_lsp = require 'lspconfig'
 
 -- vim.lsp.set_log_level("debug")
 local on_attach = function(_client, bufnr)
+
+  local wk = require("which-key")
+
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -35,40 +38,47 @@ local on_attach = function(_client, bufnr)
     bufmap(buf, 'n', 'K', '<Cmd>wincmd p<CR>', { noremap = true, silent = true })
   end
 
+
   -- Mappings.
   local opts = { noremap = true, silent = true }
-  print("Setting buffer keymappings...")
-  bufmap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  bufmap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  bufmap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  bufmap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  bufmap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  bufmap(bufnr, "n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-  bufmap(bufnr, "n", "gws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
 
-  bufmap(bufne, "n", "cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-  bufmap(bufnr, 'n', 'sh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  wk.register({
+    c = {  
+      name = "Code",
+      a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Actions" },
+      l = { '<cmd>lua vim.lsp.codelens.run()<CR>', "Code Lens" },
+      s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', "Signature help" },
+    },
+    d = {
+      name = "Document", 
+      s =  { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document symbol" },
+    },
+    D = {
+      name = "Diagnostics",
+      b = { "<cmd>lua vim.diagnostic.setloclist()<CR>", 'Buffer diagnostics' },
+      l = { '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', "Line diagnostics" },
+      a = { '<cmd>lua vim.diagnostic.setqflist()<CR>', "All workspace diagnostics" },
+      e = { '<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>', "All workspace errors" },
+      w = { '<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>', "All workspace warnings" },
+      p = { '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', "Previous error" },
+      n = { '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', "Next error" } ,
+    },
+    f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Buffer" },
+    g = {
+      name = "Go to...",
+      d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
+      D = { '<cmd>lua vim.lsp.buf.declaration()<cr>', 'Declaration' },
+      i = { '<cmd>lua vim.lsp.buf.implementation()<cr>', 'Implementation' },
+      r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'References' },
+      t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type Definition' },
+    },
+    r = {
+        name = "Refactor",
+        n = { 'cmd>lua vim.lsp.buf.rename()<CR>', "Rename" },
+    },
+    K = { '<Cmd>lua vim.lsp.buf.hover()<CR>', "Hover" },
 
-  bufmap(bufnr, 'n', 'd', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  bufmap(bufnr, 'n', 'D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-
-  bufmap(bufnr, 'n', 'wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  bufmap(bufnr, 'n', 'wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  bufmap(bufnr, 'n', 'wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-
-  bufmap(bufnr, 'n', 'rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  bufmap(bufnr, 'n', 'ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  bufmap(bufnr, "n", "f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-
-  bufmap(bufnr, 'n', 'e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-
-  bufmap(bufnr, "n", "aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]]) -- all workspace diagnostics
-  bufmap(bufnr, "n", "ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]]) -- all workspace errors
-  bufmap(bufnr, "n", "aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]]) -- all workspace warnings
-  bufmap(bufnr, "n", "d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
-
-  bufmap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  bufmap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  }, { prefix = "<localleader>", buffer = bufnr })
 
   -- DAP
   --bufmap(bufnr, "n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
@@ -92,8 +102,6 @@ local on_attach = function(_client, bufnr)
   vim.cmd [[
     command! Format execute 'lua vim.lsp.buf.formatting()'
   ]]
-
-  print("Done attaching LSP!")
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -190,7 +198,6 @@ local metals_config = require("metals").bare_config()
 
 metals_config.on_attach = function(client, bufnr)
   --require("metals").setup_dap()
-  print("METALS!!!")
   bufmap(bufnr, "n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
   on_attach(client, bufnr)
 end

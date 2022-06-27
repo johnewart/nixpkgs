@@ -245,34 +245,9 @@ local wk = require 'which-key'
 -- and hide <leader>1
 
 wk.register({
-  f = {
-    name = 'file', -- optional group name
-  },
-  b = {
-    name = 'buffer', -- optional group name
-  },
-  n = {
-    name = 'neovim', -- optional group name
-  },
-  s = {
-    name = 'search', -- optional group name
-  },
-  w = {
-    name = 'workspace', -- optional group name
-  },
-  q = {
-    name = 'quickfix', -- optional group name
-  },
-  g = {
-    name = 'git', -- optional group name
-  },
-  h = {
-    name = 'help/hunks', -- optional group name
-  },
   ['?'] = 'which_key_ignore',
   [';'] = 'which_key_ignore',
   [','] = 'which_key_ignore',
-  ['<space>'] = 'which_key_ignore',
   ['.'] = 'which_key_ignore',
 }, {
   prefix = '<leader>',
