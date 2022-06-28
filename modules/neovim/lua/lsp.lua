@@ -18,6 +18,7 @@ end
 -- Add nvim-lspconfig plugin
 local nvim_lsp = require 'lspconfig'
 
+
 -- vim.lsp.set_log_level("debug")
 local on_attach = function(_client, bufnr)
 
@@ -43,6 +44,9 @@ local on_attach = function(_client, bufnr)
   local opts = { noremap = true, silent = true }
 
   wk.register({
+    b = {
+      f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Buffer" },
+    },
     c = {  
       name = "Code",
       a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Actions" },
@@ -63,7 +67,6 @@ local on_attach = function(_client, bufnr)
       p = { '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', "Previous error" },
       n = { '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', "Next error" } ,
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Buffer" },
     g = {
       name = "Go to...",
       d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Definition" },
@@ -249,3 +252,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = nvim_metals_group,
 })
+
+-- For debugging when needed
+-- vim.lsp.set_log_level("debug")
+
