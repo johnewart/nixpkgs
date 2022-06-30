@@ -36,6 +36,7 @@ require('packer').startup(function()
   use 'tbastos/vim-lua'
   use 'LnL7/vim-nix'
   use 'ziglang/zig.vim'
+  use 'simrat39/rust-tools.nvim'
 
 
   use 'sar/luasnip.nvim' -- snippets
