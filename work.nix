@@ -9,7 +9,7 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "johnewart";
-  home.homeDirectory = "/Users/johnewart";
+  home.homeDirectory = "/home/johnewart";
  
 
   home.packages = [     
@@ -21,7 +21,7 @@
   programs.git = {
     enable = true;
     userName = "John Ewart";
-    userEmail = "john@johnewart.net";
+    userEmail = "johnewart@microsoft.com";
   };
 
   ##services.gpg-agent = { 

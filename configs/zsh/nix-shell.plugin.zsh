@@ -26,7 +26,7 @@ _toggleNixShell() {
     fi
   fi
 }
-autoload -U add-zsh-hook
-add-zsh-hook chpwd _toggleNixShell
-_toggleNixShell
+#autoload -U add-zsh-hook
+#add-zsh-hook chpwd _toggleNixShell
+#_toggleNixShell
 

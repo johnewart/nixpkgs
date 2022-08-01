@@ -132,9 +132,26 @@ local function on_cwd()
   return vim.loop.cwd()
 end
 
+-- TypeScript
+nvim_lsp.typescript.setup {
+  on_attach = on_attach, 
+  capabilities = capabilities
+}
+-- require("typescript").setup({
+--    disable_commands = false, -- prevent the plugin from creating Vim commands
+--    debug = false, -- enable debug logging for commands
+--    server = { -- pass options to lspconfig's setup method
+--        on_attach = ...,
+--    },
+--})
+
 -- C# / .NET (Omnisharp)
 local omnisharp_bin = "omnisharp"
 nvim_lsp.omnisharp.setup{
+    default_config = {
+	filetypes = { 'cs', 'vb', 'fs', 'fsx', 'razor' },
+	init_options = {},
+    },
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) },
     --root_dir = on_cwd,
     on_attach = on_attach,
@@ -175,6 +192,12 @@ nvim_lsp.sumneko_lua.setup {
     },
   },
 }
+
+require'lspconfig'.dartls.setup{
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 
 nvim_lsp.texlab.setup {
   on_attach = on_attach,
@@ -284,7 +307,6 @@ require('rust-tools').setup({
         }
     },
 })
-
 
 -- For debugging when needed
 -- vim.lsp.set_log_level("debug")

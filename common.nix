@@ -11,7 +11,8 @@ with lib;
   imports = [
     ./modules/neovim
     ./modules/emacs
-    ./modules/tmux.nix
+    ./modules/zellij.nix
+    #./modules/tmux.nix
   ];
 
   config = {
@@ -26,7 +27,7 @@ with lib;
       nixpkgs-fmt
       shfmt
 
-      python3.pkgs.black
+      #python3.pkgs.black
       pyright
       cmake
       libtool
@@ -57,12 +58,17 @@ with lib;
       coreutils
       git
       pandoc
+	
+      zellij
 
       # Java dev (maven, sbt, JDK 11, 17)
       openjdk17_headless
       maven
       sbt
       coursier
+
+      # Node bits
+      yarn
 
       kubectl
       terraform

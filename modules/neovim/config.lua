@@ -24,6 +24,7 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'fatih/vim-go'
+  use 'jose-elias-alvarez/typescript.nvim'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use({
     'scalameta/nvim-metals', 
@@ -37,6 +38,9 @@ require('packer').startup(function()
   use 'LnL7/vim-nix'
   use 'ziglang/zig.vim'
   use 'simrat39/rust-tools.nvim'
+  use { "glepnir/lspsaga.nvim", branch = "main" }
+  use 'dart-lang/dart-vim-plugin'
+  use 'thosakwe/vim-flutter'
 
 
   use 'sar/luasnip.nvim' -- snippets
@@ -62,6 +66,7 @@ require('packer').startup(function()
   use 'christoomey/vim-tmux-navigator'
 
   -- themes
+  use "rmehri01/onenord.nvim"
   use "FrenzyExists/aquarium-vim"
   use "NLKNguyen/papercolor-theme"
   use "sainnhe/everforest"
