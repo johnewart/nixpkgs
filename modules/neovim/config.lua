@@ -27,10 +27,10 @@ require('packer').startup(function()
   use 'jose-elias-alvarez/typescript.nvim'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use({
-    'scalameta/nvim-metals', 
+    'scalameta/nvim-metals',
     requires = { 
-      { "nvim-lua/plenary.nvim" }, 
-      { "mfussenegger/nvim-dap" } 
+      { "nvim-lua/plenary.nvim" },
+      { "mfussenegger/nvim-dap" }
     }
   })
   use 'bfredl/nvim-luadev'
@@ -60,7 +60,6 @@ require('packer').startup(function()
   use 'tpope/vim-sleuth'
   use 'tpope/vim-repeat'
 
-  use 'ludovicchabant/vim-gutentags'
   use 'justinmk/vim-dirvish'
   use 'preservim/nerdtree'
   use 'christoomey/vim-tmux-navigator'
@@ -76,8 +75,10 @@ require('packer').startup(function()
   use "rakr/vim-one"
   use "cseelus/vim-colors-lucid"
   use 'ray-x/go.nvim'
-  use 'ray-x/guihua.lua'  
+  use 'ray-x/guihua.lua'
   use 'liuchengxu/space-vim-theme'
+  use { "EdenEast/nightfox.nvim", tag = "v1.0.0" } -- Packer
+
 
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
@@ -137,7 +138,7 @@ vim.wo.signcolumn = 'yes'
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
 vim.g.onedark_terminal_italics = 2
-vim.cmd [[colorscheme base16-tokyo-city-dark]]
+vim.cmd [[colorscheme nightfox]]
 vim.cmd [[set background=dark]]
 
 --Add spellchecking
@@ -259,12 +260,6 @@ wk.register({
   prefix = '<leader>',
 })
 
--- Make gutentags use ripgrep
--- --python-kinds=-iv
--- --exclude=build
--- --exclude=dist
-vim.g.gutentags_file_list_command = 'fd'
-vim.g.gutentags_ctags_extra_args = { '--python-kinds=-iv' }
 
 -- remove conceal on markdown files
 vim.g.markdown_syntax_conceal = 0

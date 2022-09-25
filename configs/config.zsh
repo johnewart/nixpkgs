@@ -96,9 +96,9 @@ conda activate home
 
 eval "$(/usr/libexec/path_helper)"
 export PATH="$PATH:$HOME/.dotnet/tools"
-export PATH=$PATH:/Users/johnewart/.dapr/bin
-export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH=$PATH:$HOME/.dapr/bin
+#export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+#export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 alias be="bundle exec"
 

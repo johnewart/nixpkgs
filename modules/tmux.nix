@@ -2,7 +2,12 @@
 { pkgs, config, lib, ... }:
 
 {
+    home.packages = [
+        tmuxPlugins.nord
+    ];
+
     home.file.".tmux.conf".text = ''
+set -g @plugin 'tmux-plugins/nord'
 # command prefix (like screen)
 #set -g prefix `
 #bind-key ` send-prefix
@@ -46,7 +51,7 @@ set-option -g set-titles on
 set-option -g set-titles-string '#S:#I.#P #W' # window number,program name,active (or not)
 set-window-option -g automatic-rename on # auto name
 set -g update-environment "DISPLAY SSH_ASKPASS WINDOWID XAUTHORITY SSH_AUTH_SOCK SSH_AGENT_PID SSH_CONNECTION"
-set-environment -g 'SSH_AUTH_SOCK' '/Users/jewart/.ssh/ssh_auth_sock'
+set-environment -g 'SSH_AUTH_SOCK' '$HOME/jewart/.ssh/ssh_auth_sock'
 
 # messages
 #set-window-option -g mode-bg magenta

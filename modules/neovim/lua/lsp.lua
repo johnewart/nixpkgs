@@ -14,7 +14,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- LSP settings
--- log file location: /Users/michael/.local/share/nvim/lsp.log
+-- log file location: $HOME/.local/share/nvim/lsp.log
 -- Add nvim-lspconfig plugin
 local nvim_lsp = require 'lspconfig'
 
@@ -133,10 +133,10 @@ local function on_cwd()
 end
 
 -- TypeScript
-nvim_lsp.typescript.setup {
-  on_attach = on_attach, 
-  capabilities = capabilities
-}
+--nvim_lsp.typescript.setup {
+--  on_attach = on_attach, 
+--  capabilities = capabilities,
+--}
 -- require("typescript").setup({
 --    disable_commands = false, -- prevent the plugin from creating Vim commands
 --    debug = false, -- enable debug logging for commands
@@ -281,7 +281,7 @@ vim.api.nvim_create_autocmd("FileType", {
 require('rust-tools').setup({
     tools = { -- rust-tools options
         autoSetHints = true,
-        hover_with_actions = true,
+        --hover_with_actions = true,
         inlay_hints = {
             show_parameter_hints = false,
             parameter_hints_prefix = "",

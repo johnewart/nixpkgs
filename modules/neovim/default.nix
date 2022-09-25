@@ -8,17 +8,21 @@ nixpkgs.overlays = [
   }))
 ];
 
-  #home.packages = with pkgs; [
-  #  lua
-  #  rnix-lsp
-  #  rust-analyzer
-  #  vale
-  #  shellcheck
-  #  gopls
-  #  stylua
-  #  nodePackages.pyright
-  #  sumneko-lua-language-server
-  #];
+home.packages = with pkgs; [
+  nodejs
+  # Typescript
+  nodePackages.typescript
+  nodePackages.typescript-language-server
+  lua
+  rnix-lsp
+  rust-analyzer
+  vale
+  shellcheck
+  gopls
+  stylua
+  nodePackages.pyright
+  sumneko-lua-language-server
+ ];
 
   programs.neovim = {
    enable = true; 
