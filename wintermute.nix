@@ -9,7 +9,7 @@
   host.profile.environment = "work";
 
   home.username = "johnewart";
-  home.homeDirectory = "/Users/johnewart";
+  home.homeDirectory = "/home/johnewart";
   home.stateVersion = "22.05";
   
   home.packages = [                              
@@ -27,6 +27,6 @@
 
   programs.git = { 
     userName = "John Ewart";
-    userEmail = "johnewart@falconx.io";
+    userEmail = "johnewart@microsoft.com";
   };
 }
